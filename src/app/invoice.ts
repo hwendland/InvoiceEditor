@@ -23,6 +23,16 @@ export class Invoice {
     public lineItems: LineItem[] = [],
   ) {}
 
+  static decode(object: Invoice): Invoice {
+    console.log(object);
+    let invoice = Object.create(Invoice.prototype);
+    invoice = Object.assign(invoice, object, {
+      lineItems: object.lineItems ? object.lineItems.map(item => LineItem.decode(item)) : [],
+    });
+    console.log(invoice);
+    return invoice;
+  }
+
   totalEur() {
     if (this.lineItems && this.lineItems.length ) {
       return this.lineItems

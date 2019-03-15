@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { Invoice } from './invoice';
 import { LineItem } from './line-item';
 import { Router } from '@angular/router';
+import { convertToCamelCase } from 'ninjapiratica-case-converter';
 
 @Injectable({
   providedIn: 'root'
@@ -47,14 +48,10 @@ export class InvoiceDataService {
 
   importInvoices(input: string) {
     try {
-      const invoices = JSON.parse(input);
-      invoices.map((object, index) => { // TODO: make type safe
-        // @ts-ignore
-        const lineItems = object.line_items ? object.line_items.map(item => new LineItem(...Object.values(item))) : [];
-        // @ts-ignore
-        const invoice = new Invoice(...Object.values(object));
-        invoice.lineItems = lineItems;
-        console.log(invoice);
+      let invoices = JSON.parse(input);
+      invoices = convertToCamelCase(invoices);
+      invoices.map((object, index) => {
+        const invoice = Invoice.decode(object);
         this.addInvoice(invoice);
         if (index === 0) { this.router.navigate(['/edit', this.maxIndex]); }
       });
