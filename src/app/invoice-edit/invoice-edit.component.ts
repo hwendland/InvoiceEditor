@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Invoice } from '../invoice';
 import { LineItem } from '../line-item';
 import { InvoiceDataService } from '../invoice-data.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -22,6 +23,20 @@ export class InvoiceEditComponent implements OnInit {
     this.editMode = true;
     this.listIndex = 0;
     this.initForm();
+    this.invoiceForm.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(
+      val => {
+        const lineItems = val.lineItems.map(item =>
+          new LineItem(item.name, item.description, item.quantity, item.priceEur * 100)
+        );
+        // @ts-ignore
+        const invoice = new Invoice(...Object.values(val));
+        invoice.lineItems = lineItems;
+        this.onChanges(invoice);
+      }
+    );
   }
 
   initForm() {
@@ -56,6 +71,15 @@ export class InvoiceEditComponent implements OnInit {
       invoiceDueDate: new FormControl(invoice.invoiceDueDate),
       lineItems: new FormArray(lineItems)
     });
+  }
+
+  onChanges(invoice: Invoice) {
+    console.log(invoice);
+    if (this.editMode) {
+      this.invoiceService.updateInvoice(invoice, this.listIndex);
+    } else {
+      this.invoiceService.addInvoice(invoice);
+    }
   }
 
   totalEur() {
