@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Invoice } from '../invoice';
+import { InvoiceDataService } from '../invoice-data.service';
 import { INVOICES } from '../mock-data';
 
 @Component({
@@ -10,10 +11,10 @@ import { INVOICES } from '../mock-data';
 export class InvoiceListComponent implements OnInit {
   invoices: Invoice[];
 
-  constructor() { }
+  constructor(private dataService: InvoiceDataService) { }
 
   ngOnInit() {
-    this.invoices = INVOICES;  // TODO: get from data service
+    this.invoices = this.dataService.getInvoices();
   }
 
   getNetTotal() {

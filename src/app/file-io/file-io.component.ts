@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InvoiceDataService } from '../invoice-data.service';
 
 @Component({
   selector: 'app-file-io',
@@ -7,16 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileIoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: InvoiceDataService) { }
 
   ngOnInit() {
   }
 
-  onImport() { // call data service
-    prompt('Neue Rechnungen als JSON hinzufügen:');
+  onImport() {
+    const input = prompt('Neue Rechnungen als JSON hinzufügen:');
+    this.dataService.importInvoices(input);
   }
 
-  onExport() { // call data service
+  onExport() {
+    this.dataService.exportInvoices();
   }
 
 }
