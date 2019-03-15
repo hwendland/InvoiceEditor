@@ -28,6 +28,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params: Params) => {
         this.editMode = +params.index <= this.invoiceService.maxIndex;
+        if (+params.index > this.invoiceService.maxIndex) { this.router.navigate(['/']); }
         this.listIndex = this.editMode ? +params.index : this.invoiceService.maxIndex + 1;
         this.initForm();
         this.reassignSubscription();
@@ -91,11 +92,11 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   }
 
   onChanges(invoice: Invoice) {
-    console.log(invoice);
     if (this.editMode) {
       this.invoiceService.updateInvoice(invoice, this.listIndex);
     } else {
       this.invoiceService.addInvoice(invoice);
+      this.router.navigate(['/edit', this.listIndex]);
     }
   }
 
@@ -134,5 +135,9 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       return Math.min(nLines, 4);
     }
     return 1;
+  }
+
+  trackByFn(index: number, item: any) {
+    return index;
   }
 }
