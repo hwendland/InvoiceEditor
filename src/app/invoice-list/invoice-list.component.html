@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col">
     <h6 class="sidebar-heading text-black-50 d-flex align-items-center mt-4">
-      Rechnungen + <!--TODO: icon-->
+      Rechnungen
+      <span routerLink="edit/new">+</span> <!--TODO: icon-->
     </h6>
   </div>
 </div>
@@ -9,7 +10,7 @@
   <div class="col">
     <ul class="nav list-group">
       <li *ngFor="let invoice of invoices; let i = index">
-        <div class="row pt-3 pb-3">
+        <div class="row pt-3 pb-3" routerLink="edit/{{i}}" routerLinkActive="bg-light">
           <span class="col-sm-9" style="cursor: pointer">{{ invoice.customerName }}</span>
           <span class="d-inline-flex col-sm-2 justify-content-end text-black-50">
             {{ invoice.totalEur() | currency:'EUR':'symbol':'1.2-2':'de-DE' }}

@@ -20,6 +20,10 @@ export class InvoiceDataService {
     return this.invoices[index];
   }
 
+  get maxIndex() {
+    return this.invoices.length - 1;
+  }
+
   addInvoice(invoice: Invoice) {
     this.invoices.push(invoice);
     this.invoicesUpdated.next(this.invoices.slice());

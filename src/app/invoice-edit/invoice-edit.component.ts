@@ -4,6 +4,7 @@ import { Invoice } from '../invoice';
 import { LineItem } from '../line-item';
 import { InvoiceDataService } from '../invoice-data.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -17,12 +18,18 @@ export class InvoiceEditComponent implements OnInit {
 
   constructor(
     private invoiceService: InvoiceDataService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.editMode = true;
-    this.listIndex = 0;
-    this.initForm();
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.editMode = +params.index <= this.invoiceService.maxIndex;
+        this.listIndex = this.editMode ? +params.index : this.invoiceService.maxIndex + 1;
+        this.initForm();
+      }
+    );
     this.invoiceForm.valueChanges.pipe(
       debounceTime(400),
       distinctUntilChanged()
@@ -32,7 +39,7 @@ export class InvoiceEditComponent implements OnInit {
           new LineItem(item.name, item.description, item.quantity, item.priceEur * 100)
         );
         // @ts-ignore
-        const invoice = new Invoice(...Object.values(val));
+        const invoice = new Invoice(...Object.values(val)); // TODO: make more type safe
         invoice.lineItems = lineItems;
         this.onChanges(invoice);
       }
