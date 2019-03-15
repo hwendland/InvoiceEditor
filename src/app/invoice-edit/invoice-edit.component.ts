@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Invoice } from '../invoice';
 import { LineItem } from '../line-item';
 import { InvoiceDataService } from '../invoice-data.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-invoice-edit',
   templateUrl: './invoice-edit.component.html',
   styleUrls: ['./invoice-edit.component.css']
 })
-export class InvoiceEditComponent implements OnInit {
+export class InvoiceEditComponent implements OnInit, OnDestroy {
   listIndex: number;
   editMode = false;
   invoiceForm: FormGroup;
+  formSubscription: Subscription;
 
   constructor(
     private invoiceService: InvoiceDataService,
@@ -28,9 +30,17 @@ export class InvoiceEditComponent implements OnInit {
         this.editMode = +params.index <= this.invoiceService.maxIndex;
         this.listIndex = this.editMode ? +params.index : this.invoiceService.maxIndex + 1;
         this.initForm();
+        this.reassignSubscription();
       }
     );
-    this.invoiceForm.valueChanges.pipe(
+  }
+
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
+  }
+
+  reassignSubscription() {
+    this.formSubscription = this.invoiceForm.valueChanges.pipe(
       debounceTime(400),
       distinctUntilChanged()
     ).subscribe(
