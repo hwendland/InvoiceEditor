@@ -21,8 +21,8 @@ export const INVOICES = [
     'Alexandra Muß',
     'Hanauer Landstraße 110', '60313', 'Frankfurt am Main',
     'DE1234556787879', 'KARSDEXXX', 'CF Frankfurt GmbH',
-    'LSM20170711', 'Frankfurt am Main', '23.02.2017', 'Alexandra Muß',
-    'R201706018', 'Juni 2017', '03.07.2017', '07.07.2017',
+    'LSM20170711', 'Frankfurt am Main', new Date('2017-02-23'), 'Alexandra Muß',
+    'R201706018', 'Juni 2017', new Date('2017-07-03'), new Date('2017-07-07'),
     LINEITEMS
   ),
   new Invoice( 75, 'Best Worscht'),

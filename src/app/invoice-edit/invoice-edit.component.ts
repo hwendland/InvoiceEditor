@@ -76,12 +76,12 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       accountOwner: new FormControl(invoice.accountOwner),
       mandateReference: new FormControl(invoice.mandateReference),
       mandateCity: new FormControl(invoice.mandateCity),
-      mandateDate: new FormControl(invoice.mandateDate),
+      mandateDate: new FormControl(invoice.mandateDate ? invoice.mandateDate.toISOString().substring(0, 10) : null),
       mandateSignee: new FormControl(invoice.mandateSignee),
       invoiceNumber: new FormControl(invoice.invoiceNumber),
-      invoiceDate: new FormControl(invoice.invoiceDate),
+      invoiceDate: new FormControl(invoice.invoiceDate ? invoice.invoiceDate.toISOString().substring(0, 10) : null),
       invoicePeriod: new FormControl(invoice.invoicePeriod),
-      invoiceDueDate: new FormControl(invoice.invoiceDueDate),
+      invoiceDueDate: new FormControl(invoice.invoiceDueDate ? invoice.invoiceDueDate.toISOString().substring(0, 10) : null),
       lineItems: new FormArray(lineItems)
     });
   }
