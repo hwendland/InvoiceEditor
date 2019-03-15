@@ -3,6 +3,16 @@ form {
   color: rgba(0, 0, 0, 0.5);
 }
 
+th {
+  font-weight: normal;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+tr {
+  border-bottom: 10px solid #f8f9fa;
+}
+
 .form-heading {
   font-size: small;
   text-transform: uppercase;
@@ -12,3 +22,5 @@ form {
 .form-control {
   font-size: x-small;
 }
+
+.w-15 { width: 15% }

@@ -3,7 +3,6 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Invoice } from '../invoice';
 import { LineItem } from '../line-item';
 import { InvoiceDataService } from '../invoice-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -57,5 +56,15 @@ export class InvoiceEditComponent implements OnInit {
       invoiceDueDate: new FormControl(invoice.invoiceDueDate),
       lineItems: new FormArray(lineItems)
     });
+  }
+
+  totalEur() {
+    return this.invoiceForm.value.lineItems
+      .map((item, index) => this.itemTotal(index))
+      .reduce((prev, current) => prev + current);
+  }
+
+  itemTotal(i: number) {
+    return this.invoiceForm.value.lineItems[i].quantity * this.invoiceForm.value.lineItems[i].priceEur;
   }
 }

@@ -105,6 +105,65 @@
           <h6 class="form-heading mt-4 mb-3">Rechnungsposten</h6>
         </div>
       </div>
+      <table class="table table-borderless w-100 text-black-50" *ngIf="invoiceForm.value.lineItems.length">
+        <thead>
+        <tr>
+          <th>Pos</th>
+          <th class="w-15">Name</th>
+          <th class="w-50">Beschreibung</th>
+          <th>Anzahl</th>
+          <th>Einzelpreis</th>
+          <th></th>
+          <th class="text-center">Summe</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ctrl of invoiceForm.value.lineItems; let i = index;"
+            [formGroupName]="i" class="bg-white mb-2">
+          <td class="text-right" style="font-size: medium">{{i}}</td>
+          <td><input type="text" class="form-control form-control-sm" formControlName="name"></td>
+          <td> <textarea class="form-control form-control-sm" formControlName="description"></textarea>
+          </td>
+          <td><input type="number" step="1" min="0" class="form-control form-control-sm"
+                     formControlName="quantity"></td>
+          <td class="pr-1">
+            <input type="number" min="0" step="0.01" class="form-control form-control-sm" formControlName="priceEur">
+          </td>
+          <td class="text-left pl-0 pt-3">€</td>
+          <td class="text-right pt-3">{{ itemTotal(i) | currency:'EUR':'symbol':'1.2-2':'de-DE' }}</td>
+          <td class="pt-3">
+            X<!--TODO: icon-->
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col" style="font-size: x-large">
+      + <!--TODO: icon-->
+    </div>
+    <div class="flex-column d-inline-flex justify-content-end pr-5"
+         *ngIf="invoiceForm.value.lineItems.length">
+      <div class="row">
+        <div class="col mr-1" style="color: black">Netto</div>
+        <div class="col text-right" style="color: black">
+          {{ totalEur() | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">Um.-St. (19%)</div>
+        <div class="col text-right">
+          {{ totalEur()*0.19 | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">Brutto</div>
+        <div class="col text-right">
+          {{ totalEur()*1.19 | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+        </div>
+      </div>
     </div>
   </div>
 </form>
