@@ -13,6 +13,10 @@ export class InvoiceDataService {
     return this.invoices.slice();
   }
 
+  getInvoice(index: number) {
+    return this.invoices[index];
+  }
+
   exportInvoices() {
     console.log(JSON.stringify(this.invoices));
   }

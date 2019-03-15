@@ -1,3 +1,111 @@
-<p>
-  invoice-edit works!
-</p>
+<form [formGroup]="invoiceForm" class="ml-4 mr-4" style="padding-top: 3rem">
+  <div class="row">
+    <div class="col-md-6 pr-md-4">
+      <div class="row">
+        <div class="col">
+          <h6 class="form-heading mt-4 mb-3">Allgemeine Daten</h6>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="cId" class="col-4 col-form-label">Kundennr.</label>
+        <input id="cId" type="number" class="col-8 form-control form-control-sm" formControlName="customerId">
+      </div>
+      <div class="form-group row">
+        <label for="cName" class="col-4 col-form-label">Name</label>
+        <input id="cName" type="text" class="col-8 form-control form-control-sm" formControlName="customerName">
+      </div>
+      <div class="form-group row">
+        <label for="contact" class="col-4 col-form-label">Ansprechpartner</label>
+        <input id="contact" type="text" class="col-8 form-control form-control-sm" formControlName="customerContactPerson">
+      </div>
+      <div class="form-group row">
+        <label for="cAddress" class="col-4 col-form-label">Anschrift</label>
+        <input id="cAddress" type="text" class="col-8 form-control form-control-sm" formControlName="customerAddress">
+      </div>
+      <div class="form-group row">
+        <label for="cZip" class="col-4 col-form-label">PLZ</label>
+        <input id="cZip" type="text" class="col-8 form-control form-control-sm" formControlName="customerZip">
+      </div>
+      <div class="form-group row">
+        <label for="cCity" class="col-4 col-form-label">Ort</label>
+        <input id="cCity" type="text" class="col-8 form-control form-control-sm" formControlName="customerCity">
+      </div>
+    </div>
+    <div class="col-md-6 pl-md-4">
+      <div class="row">
+        <div class="col">
+          <h6 class="form-heading mt-4 mb-3">Zahlungsinformationen</h6>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="iban" class="col-4 col-form-label">IBAN</label>
+        <input id="iban" type="text" class="col-8 form-control form-control-sm" formControlName="iban">
+      </div>
+      <div class="form-group row">
+        <label for="bic" class="col-4 col-form-label">BIC</label>
+        <input id="bic" type="text" class="col-8 form-control form-control-sm" formControlName="bic">
+      </div>
+      <div class="form-group row">
+        <label for="accOwner" class="col-4 col-form-label">Kontoinhaber</label>
+        <input id="accOwner" type="text" class="col-8 form-control form-control-sm" formControlName="accountOwner">
+      </div>
+      <div class="form-group row">
+        <label for="mandateRef" class="col-4 col-form-label">Mandatsreferenz</label>
+        <input id="mandateRef" type="text" class="col-8 form-control form-control-sm" formControlName="mandateReference">
+      </div>
+      <div class="form-group row">
+        <label for="mandateCity" class="col-4 col-form-label">Mandat Ort</label>
+        <input id="mandateCity" type="text" class="col-8 form-control form-control-sm" formControlName="mandateCity">
+      </div>
+      <div class="form-group row">
+        <label for="mandateDate" class="col-4 col-form-label">Mandat Datum</label>
+        <input id="mandateDate" type="text" class="col-8 form-control form-control-sm" formControlName="mandateDate">
+      </div>
+      <div class="form-group row">
+        <label for="signee" class="col-4 col-form-label">Mandat Person</label>
+        <input id="signee" type="text" class="col-8 form-control form-control-sm" formControlName="mandateSignee">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h6 class="form-heading mt-4 mb-3">Rechnungsdaten</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pr-md-4">
+          <div class="form-group row">
+            <label for="invId" class="col-4 col-form-label">Rechnungsnr.</label>
+            <input id="invId" type="text" class="col-8 form-control form-control-sm" formControlName="invoiceNumber">
+          </div>
+          <div class="form-group row">
+            <label for="invPeriod" class="col-4 col-form-label">Zeitraum</label>
+            <input id="invPeriod" type="text" class="col-8 form-control form-control-sm" formControlName="invoicePeriod">
+          </div>
+        </div>
+        <div class="col pl-md-4">
+          <div class="form-group row">
+            <label for="invDate" class="col-4 col-form-label">Rechnungsdatum</label>
+            <input id="invDate" type="text" class="col-8 form-control form-control-sm" formControlName="invoiceDate">
+          </div>
+          <div class="form-group row">
+            <label for="invDueDate" class="col-4 col-form-label">Fälligkeitsdatum</label>
+            <input id="invDueDate" type="text" class="col-8 form-control form-control-sm" formControlName="invoiceDueDate">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pr-0" formArrayName="lineItems">
+      <div class="row">
+        <div class="col">
+          <h6 class="form-heading mt-4 mb-3">Rechnungsposten</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

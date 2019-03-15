@@ -24,6 +24,7 @@ registerLocaleData(localeDe);
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

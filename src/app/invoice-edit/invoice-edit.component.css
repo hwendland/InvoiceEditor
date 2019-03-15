@@ -1,0 +1,14 @@
+form {
+  font-size: x-small;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.form-heading {
+  font-size: small;
+  text-transform: uppercase;
+  vertical-align: central;
+}
+
+.form-control {
+  font-size: x-small;
+}
