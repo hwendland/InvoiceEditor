@@ -133,8 +133,8 @@
           </td>
           <td class="text-left pl-0 pt-3">€</td>
           <td class="text-right pt-3">{{ itemTotal(i) | currency:'EUR':'symbol':'1.2-2':'de-DE' }}</td>
-          <td class="pt-3">
-            <span style="cursor: pointer" (click)="onDeleteLineItem(i)">X</span> <!--TODO: icon-->
+          <td class="pt-3" style="color: #B4BDC5">
+            <i class="far fa-trash-alt fa-lg" style="cursor: pointer" (click)="onDeleteLineItem(i)"></i>
           </td>
         </tr>
         </tbody>
@@ -142,8 +142,8 @@
     </div>
   </div>
   <div class="row mb-5">
-    <div class="col" style="font-size: x-large">
-      <span (click)="onAddLineItem()" style="cursor: pointer">+ <!--TODO: icon--></span>
+    <div class="col">
+      <i class="material-icons primary md-36" style="cursor: pointer" (click)="onAddLineItem()">add_circle</i>
     </div>
     <div class="flex-column d-inline-flex justify-content-end pr-5"
          *ngIf="invoiceForm.value.lineItems.length">

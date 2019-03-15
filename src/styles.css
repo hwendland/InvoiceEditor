@@ -4,3 +4,7 @@ html, body {
   height: 100%;
   background-color: #f8f9fa;
 }
+
+.material-icons.primary { color: #007bff; }
+.material-icons.light-grey { color: #6c757d; }
+.material-icons.md-36 { font-size: 36px; }

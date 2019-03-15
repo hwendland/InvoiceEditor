@@ -2,7 +2,7 @@
   <div class="col">
     <h6 class="sidebar-heading text-black-50 d-flex align-items-center mt-4">
       Rechnungen
-      <span routerLink="edit/new">+</span> <!--TODO: icon-->
+      <i class="material-icons primary pl-2" style="cursor: pointer" routerLink="edit/new">add_circle</i>
     </h6>
   </div>
 </div>
@@ -16,7 +16,7 @@
             {{ invoice.totalEur() | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
           </span>
           <span class="col-xs-1">
-             > <!--TODO: replace with icon-->
+             <i class="material-icons small light-grey">chevron_right</i>
           </span>
         </div>
       </li>
