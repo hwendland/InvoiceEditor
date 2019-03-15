@@ -5,6 +5,8 @@ import { Invoice } from './invoice';
 import { LineItem } from './line-item';
 import { Router } from '@angular/router';
 import { convertToCamelCase } from 'ninjapiratica-case-converter';
+import { isDate } from '@angular/common/src/i18n/format_date';
+import { isComponentInstance } from '@angular/core/src/render3/context_discovery';
 
 @Injectable({
   providedIn: 'root'
@@ -43,13 +45,13 @@ export class InvoiceDataService {
   }
 
   exportInvoices() {
-    console.log(JSON.stringify(this.invoices));
+    console.log(JSON.stringify(this.invoices, Invoice.dateReplacer));
   }
 
   importInvoices(input: string) {
     try {
       let invoices = JSON.parse(input);
-      invoices = convertToCamelCase(invoices);
+      invoices = convertToCamelCase(invoices);  // JSON keys are snake case
       invoices.map((object, index) => {
         const invoice = Invoice.decode(object);
         this.addInvoice(invoice);

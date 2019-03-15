@@ -119,7 +119,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let ctrl of invoiceForm.value.lineItems; let i = index; trackBy: trackByFn"
+        <tr *ngFor="let ctrl of invoiceForm.value.lineItems; let i = index; trackBy: lineItemTracker"
             [formGroupName]="i" class="bg-white mb-2">
           <td class="text-right" style="font-size: medium">{{i}}</td>
           <td><input type="text" class="form-control form-control-sm" formControlName="name"></td>

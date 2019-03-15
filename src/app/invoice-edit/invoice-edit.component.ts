@@ -130,7 +130,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     return 1;
   }
 
-  trackByFn(index: number, item: any) {
+  lineItemTracker(index: number, item: any) {
     return index;
   }
 }
