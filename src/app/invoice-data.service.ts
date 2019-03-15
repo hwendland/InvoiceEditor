@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { INVOICES } from './mock-data';
 import { Subject } from 'rxjs';
 import { Invoice } from './invoice';
+import { LineItem } from './line-item';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class InvoiceDataService {
   invoices = INVOICES;
   invoicesUpdated = new Subject<Invoice[]>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   getInvoices() {
     return this.invoices.slice();
@@ -44,6 +46,21 @@ export class InvoiceDataService {
   }
 
   importInvoices(input: string) {
-    console.log(input);
+    try {
+      const invoices = JSON.parse(input);
+      invoices.map((object, index) => { // TODO: make type safe
+        // @ts-ignore
+        const lineItems = object.line_items ? object.line_items.map(item => new LineItem(...Object.values(item))) : [];
+        // @ts-ignore
+        const invoice = new Invoice(...Object.values(object));
+        invoice.lineItems = lineItems;
+        console.log(invoice);
+        this.addInvoice(invoice);
+        if (index === 0) { this.router.navigate(['/edit', this.maxIndex]); }
+      });
+    } catch (e) {
+      console.log(e);
+      alert('Unbekanntes Datenformat.');
+    }
   }
 }
