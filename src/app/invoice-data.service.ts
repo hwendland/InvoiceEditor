@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { INVOICES } from './mock-data';
 import { Subject } from 'rxjs';
 import { Invoice } from './invoice';
-import { LineItem } from './line-item';
 import { Router } from '@angular/router';
 import { convertToCamelCase } from 'ninjapiratica-case-converter';
-import { isDate } from '@angular/common/src/i18n/format_date';
-import { isComponentInstance } from '@angular/core/src/render3/context_discovery';
 
 @Injectable({
   providedIn: 'root'
