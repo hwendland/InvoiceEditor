@@ -3,10 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
+import { NoSelectionComponent } from './no-selection/no-selection.component';
+import { FileIoComponent } from './file-io/file-io.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InvoiceListComponent,
+    InvoiceEditComponent,
+    NoSelectionComponent,
+    FileIoComponent
   ],
   imports: [
     BrowserModule,
