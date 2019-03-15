@@ -123,7 +123,8 @@
             [formGroupName]="i" class="bg-white mb-2">
           <td class="text-right" style="font-size: medium">{{i}}</td>
           <td><input type="text" class="form-control form-control-sm" formControlName="name"></td>
-          <td> <textarea class="form-control form-control-sm" formControlName="description"></textarea>
+          <td>
+            <textarea [rows]="getRows(i)" class="form-control form-control-sm" formControlName="description"></textarea>
           </td>
           <td><input type="number" step="1" min="0" class="form-control form-control-sm"
                      formControlName="quantity"></td>
@@ -133,7 +134,7 @@
           <td class="text-left pl-0 pt-3">€</td>
           <td class="text-right pt-3">{{ itemTotal(i) | currency:'EUR':'symbol':'1.2-2':'de-DE' }}</td>
           <td class="pt-3">
-            X<!--TODO: icon-->
+            <span style="cursor: pointer" (click)="onDeleteLineItem(i)">X</span> <!--TODO: icon-->
           </td>
         </tr>
         </tbody>
@@ -142,7 +143,7 @@
   </div>
   <div class="row mb-5">
     <div class="col" style="font-size: x-large">
-      + <!--TODO: icon-->
+      <span (click)="onAddLineItem()" style="cursor: pointer">+ <!--TODO: icon--></span>
     </div>
     <div class="flex-column d-inline-flex justify-content-end pr-5"
          *ngIf="invoiceForm.value.lineItems.length">

@@ -67,4 +67,26 @@ export class InvoiceEditComponent implements OnInit {
   itemTotal(i: number) {
     return this.invoiceForm.value.lineItems[i].quantity * this.invoiceForm.value.lineItems[i].priceEur;
   }
+
+  onAddLineItem() {
+    (this.invoiceForm.get('lineItems') as FormArray).push( new FormGroup({
+      name: new FormControl(''),
+      description: new FormControl(''),
+      quantity: new FormControl(null),
+      priceEur: new FormControl(null),
+    }));
+  }
+
+  onDeleteLineItem(index: number) {
+    (this.invoiceForm.get('lineItems') as FormArray).removeAt(index);
+  }
+
+  getRows(index: number) {
+    const description = this.invoiceForm.value.lineItems[index].description;
+    if (description) {
+      const nLines = description.split('\n').length;
+      return Math.min(nLines, 4);
+    }
+    return 1;
+  }
 }
