@@ -1,1 +1,54 @@
-
+<div class="row">
+  <div class="col">
+    <h6 class="sidebar-heading text-black-50 d-flex align-items-center mt-4">
+      Rechnungen + <!--TODO: icon-->
+    </h6>
+  </div>
+</div>
+<div class="row border-bottom">
+  <div class="col">
+    <ul class="nav list-group">
+      <li *ngFor="let invoice of invoices; let i = index">
+        <div class="row pt-3 pb-3">
+          <span class="col-sm-9" style="cursor: pointer">{{ invoice.customerName }}</span>
+          <span class="d-inline-flex col-sm-2 justify-content-end text-black-50">
+            {{ invoice.totalEur() | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+          </span>
+          <span class="col-xs-1">
+             > <!--TODO: replace with icon-->
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row pb-5">
+  <div class="col">
+    <ul class="nav list-group">
+      <li>
+        <div class="row mt-2 mb-2">
+          <span class="col-sm-9">Netto</span>
+          <span class="d-inline-flex col-sm-2 justify-content-end text-black-50">
+            {{ getNetTotal() | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+          </span>
+        </div>
+      </li>
+      <li>
+        <div class="row mt-2 mb-2">
+          <span class="col-sm-9">Um-St. (19%)</span>
+          <span class="d-inline-flex col-sm-2 justify-content-end text-black-50">
+            {{ getNetTotal() * 0.19 | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+          </span>
+        </div>
+      </li>
+      <li>
+        <div class="row mt-2 mb-2">
+          <span class="col-sm-9">Brutto</span>
+          <span class="d-inline-flex col-sm-2 justify-content-end text-black-50">
+            {{ getNetTotal() * 1.19 | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

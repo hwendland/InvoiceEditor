@@ -7,4 +7,10 @@ export class LineItem {
     public priceCents: number = null,
   ) { }
 
+  totalEur() {
+    if (this.quantity && this.priceCents) {
+      return this.quantity * this.priceCents / 100;
+    }
+    return 0;
+  }
 }

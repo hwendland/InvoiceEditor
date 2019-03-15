@@ -8,6 +8,10 @@ import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { NoSelectionComponent } from './no-selection/no-selection.component';
 import { FileIoComponent } from './file-io/file-io.component';
 
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+registerLocaleData(localeDe);
+
 @NgModule({
   declarations: [
     AppComponent,

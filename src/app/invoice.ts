@@ -23,4 +23,12 @@ export class Invoice {
     public lineItems: LineItem[] = [],
   ) {}
 
+  totalEur() {
+    if (this.lineItems && this.lineItems.length ) {
+      return this.lineItems
+        .map(item => item.totalEur())
+        .reduce((prev, current) => prev + current);
+    }
+    return 0;
+  }
 }
