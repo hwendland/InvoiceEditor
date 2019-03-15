@@ -46,6 +46,7 @@ export class InvoiceDataService {
 
   exportInvoices() {
     console.log(JSON.stringify(this.invoices, Invoice.dateReplacer));
+    alert('Output printed to console.');
   }
 
   importInvoices(input: string) {
