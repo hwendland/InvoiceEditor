@@ -12,4 +12,11 @@ export class FileIoComponent implements OnInit {
   ngOnInit() {
   }
 
+  onImport() { // call data service
+    prompt('Neue Rechnungen als JSON hinzufügen:');
+  }
+
+  onExport() { // call data service
+  }
+
 }
