@@ -46,12 +46,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       distinctUntilChanged()
     ).subscribe(
       val => {
-        const lineItems = val.lineItems.map(item =>
-          new LineItem(item.name, item.description, item.quantity, item.priceEur * 100)
-        );
-        // @ts-ignore
-        const invoice = new Invoice(...Object.values(val)); // TODO: make more type safe
-        invoice.lineItems = lineItems;
+        const invoice = Invoice.decode(val);
         this.onChanges(invoice);
       }
     );
@@ -66,7 +61,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
         name: new FormControl(item.name),
         description: new FormControl(item.description),
         quantity: new FormControl(item.quantity),
-        priceEur: new FormControl((item.priceCents / 100).toFixed(2)),
+        priceEur: new FormControl((item.priceEur).toFixed(2)),
       }));
     }
     this.invoiceForm = new FormGroup({
@@ -106,13 +101,11 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   }
 
   totalEur() {
-    return this.invoiceForm.value.lineItems
-      .map((item, index) => this.itemTotal(index))
-      .reduce((prev, current) => prev + current);
+    return Invoice.decode(this.invoiceForm.value).totalEur();
   }
 
   itemTotal(i: number) {
-    return this.invoiceForm.value.lineItems[i].quantity * this.invoiceForm.value.lineItems[i].priceEur;
+    return LineItem.decode(this.invoiceForm.value.lineItems[i]).totalEur();
   }
 
   onAddLineItem() {

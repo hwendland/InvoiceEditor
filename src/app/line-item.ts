@@ -4,8 +4,16 @@ export class LineItem {
     public name: string = '',
     public description: string = '',
     public quantity: number = null,
-    public priceCents: number = null,
+    private priceCents: number = null,
   ) { }
+
+  get priceEur() {
+    return this.priceCents / 100;
+  }
+
+  set priceEur(priceEur: number) {
+    this.priceCents = priceEur * 100;
+  }
 
   static decode(obj: LineItem): LineItem {
     const item = Object.create(LineItem.prototype);
@@ -14,7 +22,7 @@ export class LineItem {
 
   totalEur() {
     if (this.quantity && this.priceCents) {
-      return this.quantity * this.priceCents / 100;
+      return this.quantity * this.priceEur;
     }
     return 0;
   }
