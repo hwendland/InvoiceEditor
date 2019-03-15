@@ -55,7 +55,7 @@ export class InvoiceEditComponent implements OnInit {
         name: new FormControl(item.name),
         description: new FormControl(item.description),
         quantity: new FormControl(item.quantity),
-        priceEur: new FormControl(item.priceCents / 100),
+        priceEur: new FormControl((item.priceCents / 100).toFixed(2)),
       }));
     }
     this.invoiceForm = new FormGroup({
@@ -87,6 +87,11 @@ export class InvoiceEditComponent implements OnInit {
     } else {
       this.invoiceService.addInvoice(invoice);
     }
+  }
+
+  onDeleteInvoice() {
+    this.invoiceService.deleteInvoice(this.listIndex);
+    this.router.navigate(['/']);
   }
 
   totalEur() {
