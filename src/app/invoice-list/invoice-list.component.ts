@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Invoice } from '../invoice';
 import { InvoiceDataService } from '../invoice-data.service';
-import { INVOICES } from '../mock-data';
 
 @Component({
   selector: 'app-invoice-list',

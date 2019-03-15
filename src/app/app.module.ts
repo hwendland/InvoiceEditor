@@ -10,6 +10,7 @@ import { FileIoComponent } from './file-io/file-io.component';
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -22,6 +23,7 @@ registerLocaleData(localeDe);
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
